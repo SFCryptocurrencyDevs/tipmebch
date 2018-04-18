@@ -121,3 +121,7 @@ typings/
 # next.js build output
 .next
 .DS_Store
+
+# Rust
+/native/target
+**/*.rs.bk

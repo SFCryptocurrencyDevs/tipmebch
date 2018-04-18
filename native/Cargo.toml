@@ -1,0 +1,16 @@
+[package]
+name = "testty"
+version = "0.1.0"
+authors = ["robertdurst <rsdurst@colby.edu>"]
+license = "MIT"
+build = "build.rs"
+
+[lib]
+name = "testty"
+crate-type = ["dylib"]
+
+[build-dependencies]
+neon-build = "0.1.22"
+
+[dependencies]
+neon = "0.1.22"

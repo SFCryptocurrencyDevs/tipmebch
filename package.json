@@ -4,7 +4,8 @@
   "description": "Tipping for Telegram with BCH",
   "scripts": {
     "watch": "nodemon -x 'DEBUG=* npm start'",
-    "start": "node -r panik index.js"
+    "start": "node -r panik index.js",
+    "install": "neon build"
   },
   "keywords": [
     "bitcoin",
@@ -27,7 +28,8 @@
     "redlock": "3.1.1",
     "shortid": "2.2.8",
     "superagent": "3.8.2",
-    "telegraf": "3.18.0"
+    "telegraf": "3.18.0",
+    "neon-cli": "^0.1.22"
   },
   "main": "index.js",
   "devDependencies": {
