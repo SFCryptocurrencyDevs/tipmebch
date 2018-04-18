@@ -1,6 +1,6 @@
-# tipmebch
+# tipmebch SF Cryptocurrency Devs
 
-Tipping for Telegram with Bitcoin
+Tipping for Telegram with Bitcoin Forked for SF Cryptocurrency Devs to get regular developers building Cyrptocurrency Applications for fun and skills improvement. Tip me BCH!
 
 ![Logo](https://raw.githubusercontent.com/abrkn/tipmebch/master/logo.png)
 
@@ -9,7 +9,7 @@ Tipping for Telegram with Bitcoin
 This software is highly experimental and may lead to loss of funds.
 The author takes no responsibility for your money.
 
-## Developer work instructions
+## Developer Github Repo Forking instructions
 ### Step 1: Fork a copy of this Repo into your own Github account.
 Fork on Github into your own repo
 
