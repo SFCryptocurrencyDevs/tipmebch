@@ -18,7 +18,7 @@ Fork on Github into your own repo
 git clone git@github.com:your-username/tipmebch.git
 ```
 
-### Step 3: Change directorirs to the tipbot directory
+### Step 3: Change directories to the tipbot directory
 ```shell
 cd tipmebch
 ```
@@ -40,7 +40,6 @@ git fetch upstream
 git checkout master
 git merge upstream/master
 git checkout new-branch-feature
-git rebase master
 ```
 
 ### Step 7: Go to Github and make a Pull Request and The SF Cryptocurrency Devs Telegram should alert with a post!
