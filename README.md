@@ -40,6 +40,7 @@ git fetch upstream
 git checkout master
 git merge upstream/master
 git checkout new-branch-feature
+git push
 ```
 
 ### Step 7: Go to Github and make a Pull Request and The SF Cryptocurrency Devs Telegram should alert with a post!
