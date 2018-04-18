@@ -117,6 +117,7 @@ typings/
 
 # dotenv environment variables file
 .env
+env.sh
 
 # next.js build output
 .next
