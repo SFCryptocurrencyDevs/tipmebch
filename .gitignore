@@ -126,3 +126,4 @@ env.sh
 # Rust
 /native/target
 **/*.rs.bk
+/native/index.node

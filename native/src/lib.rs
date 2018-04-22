@@ -1,4 +1,6 @@
 extern crate reqwest;
+extern crate ws;
+
 
 #[macro_use]
 extern crate neon;
@@ -8,12 +10,12 @@ use neon::js::JsString;
 
 pub mod meetup;
 
-fn hello(call: Call) -> JsResult<JsString> {
-    let result = &format!("{:?}", meetup::get_events().unwrap());
+fn stream(call: Call) -> JsResult<(JsString)> {
+    meetup::stream::connect_to_stream();
     let scope = call.scope;
-    Ok(JsString::new(scope, result).unwrap())
+    Ok(JsString::new(scope, "hello").unwrap())
 }
 
 register_module!(m, {
-    m.export("hello", hello)
+    m.export("meetup_stream", stream)
 });
