@@ -48,6 +48,11 @@ git push
 
 ## Installation
 
+Install rust https://www.rust-lang.org/en-US/install.html
+```
+curl https://sh.rustup.rs -sSf | sh
+```
+
 ```bash
 npm install
 ```
