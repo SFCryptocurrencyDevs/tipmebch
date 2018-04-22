@@ -1,6 +1,6 @@
 extern crate reqwest;
 extern crate ws;
-
+extern crate serde_json;
 
 #[macro_use]
 extern crate neon;
