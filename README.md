@@ -103,5 +103,5 @@ See [LICENSE](LICENSE)
 
 ## Authors
 
-Andreas Brekken <mailto:andreas@brekken.com>
-SF Cryptocurrency Devs San Francisco
+1. Andreas Brekken <mailto:andreas@brekken.com>
+2. SF Cryptocurrency Devs San Francisco
