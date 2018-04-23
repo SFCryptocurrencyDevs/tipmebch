@@ -48,12 +48,27 @@ git push
 
 ## Installation
 
+### For Mac OS Add Home Brew GCC to your Homebrew
+```shell
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install gcc
+```
+
+### For Linux Install the Developer Tools
+```shell
+sudo yum groupinstall 'Development Tools'
+```
+
 Install rust https://www.rust-lang.org/en-US/install.html
 ```
 curl https://sh.rustup.rs -sSf | sh
+
+# Add rust to your environment path
+source $HOME/.cargo/env
 ```
 
 ```bash
+brew install nodejs
 npm install
 ```
 
