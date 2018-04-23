@@ -9,6 +9,15 @@ Tipping for Telegram with Bitcoin Forked for SF Cryptocurrency Devs to get regul
 This software is highly experimental and may lead to loss of funds.
 The author takes no responsibility for your money.
 
+## Where to get started?
+Ah, great question! In fact, we anticipated this very question. To make it as easy as possible to jump right in, we have
+created project proposals within the issues of this repo. The project proposals are denoted with the Project Proposal label.
+To make it even easier to distinguish between the different project proposals, we have labeled them:
+
+* JavaScript or Rust
+* Cryptocurrency integration or Chat Bot Integration
+* Work in Prgress (WIP) or Not Yet Started (NYS)
+
 ## Developer Github Repo Forking instructions
 ### Step 1: Fork a copy of this Repo into your own Github account.
 Fork on Github into your own repo
