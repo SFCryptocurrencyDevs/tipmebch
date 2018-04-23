@@ -48,12 +48,29 @@ git push
 
 ## Installation
 
+### For Mac OS Add Home Brew GCC to your Homebrew
+```shell
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install gcc
+```
+
+### For Linux Install the Developer Tools
+```shell
+sudo yum groupinstall 'Development Tools'
+```
+
 Install rust https://www.rust-lang.org/en-US/install.html
 ```
 curl https://sh.rustup.rs -sSf | sh
 ```
 
+# Add rust to your environment path
+```
+source $HOME/.cargo/env
+```
+
 ```bash
+brew install nodejs
 npm install
 ```
 
@@ -62,10 +79,10 @@ npm install
 Define the environment variables:
 
 ```bash
-export TELEGRAM_BOT_TOKEN=496343161:yoursecret
+export TELEGRAM_BOT_TOKEN=yourbottoken:yoursecret
 export BITCOIND_URL=http://rpcuser:rpcpassword@localhost:8333
 export STAFF_USER_ID=403107081
-export TELEGRAM_BOT_USERNAME=TipMeBchBot
+export TELEGRAM_BOT_USERNAME=YourBotUserName
 export DEFAULT_STICKER_SET=pepe
 export REDIS_URL=redis://localhost
 ```
@@ -84,6 +101,7 @@ See [sticker set documentation](docs/stickers.md)
 
 See [LICENSE](LICENSE)
 
-## Author
+## Authors
 
-Andreas Brekken <mailto:andreas@brekken.com>
+1. Andreas Brekken <mailto:andreas@brekken.com>
+2. SF Cryptocurrency Devs San Francisco <http://SFCryptocurrencyDevs.com>
