@@ -1,6 +1,6 @@
 extern crate reqwest;
-extern crate ws;
 extern crate serde_json;
+extern crate ws;
 
 #[macro_use]
 extern crate neon;
@@ -16,6 +16,4 @@ fn stream(call: Call) -> JsResult<(JsString)> {
     Ok(JsString::new(scope, "hello").unwrap())
 }
 
-register_module!(m, {
-    m.export("meetup_stream", stream)
-});
+register_module!(m, { m.export("stream", stream) });
