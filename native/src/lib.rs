@@ -16,4 +16,7 @@ fn stream(call: Call) -> JsResult<(JsString)> {
     Ok(JsString::new(scope, "hello").unwrap())
 }
 
-register_module!(m, { m.export("stream", stream) });
+register_module!(m, {
+    try!(m.export("stream", stream));
+    Ok(())
+});

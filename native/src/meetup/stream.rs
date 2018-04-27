@@ -33,12 +33,13 @@ pub fn connect_to_stream() {
         base,
         &env::var("MEETUP_EVENT_ID").unwrap()
     );
+
     connect(url, |out| Client { out: out }).unwrap()
 }
 
 // Deserialize the received data
-fn deserialize_string(money: &Message) -> std::result::Result<(), serde_json::Error> {
-    let thing: &str = match money.as_text() {
+fn deserialize_string(msg: &Message) -> std::result::Result<(), serde_json::Error> {
+    let thing: &str = match msg.as_text() {
         Ok(res) => res,
         _ => "",
     };
@@ -68,8 +69,14 @@ pub fn respond(
     let split_word: Vec<&str> = words.split(' ').collect();
     let command = split_word[0];
 
+    // By far the nicest code in this rat nest
     let response = match command {
         "/help" => format!("he wants help"),
+        "/about" => format!("he wants to know about"),
+        "/price" => format!(
+            "The current price of XLM is ${:?}",
+            get_xlm_price().unwrap()
+        ),
         _ => format!("err"),
     };
 
@@ -90,4 +97,17 @@ pub fn respond(
     }
 
     Ok(())
+}
+
+// TODO: figure out how to deal with errors correctly
+// TODO: is f64 the correct return val?
+pub fn get_xlm_price() -> std::result::Result<(f64), reqwest::Error> {
+    let url = "https://min-api.cryptocompare.com/data/price?fsym=XLM&tsyms=USD";
+
+    let client = reqwest::Client::new();
+    let resp = client.get(url).send()?.text()?;
+
+    let v: serde_json::Value = serde_json::from_str(&resp).expect("Should have a value.");
+    let price = v["USD"].as_f64().unwrap();
+    Ok(price)
 }

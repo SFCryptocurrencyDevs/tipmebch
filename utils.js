@@ -62,10 +62,11 @@ exports.extractUserDiscordIdFromTag = _ => {
 const BITCOIN_BASE58_ADDRESS_REGEX = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/;
 
 exports.internalBchAddressToStandard = (address, withPrefix = false) => {
-  assert(address.match(BITCOIN_BASE58_ADDRESS_REGEX));
+  // assert(address.match(BITCOIN_BASE58_ADDRESS_REGEX));
 
-  const bchAddress = new bch.Address(address);
-  return bchAddress.toString(bch.Address.CashAddrFormat);
+  // const bchAddress = new bch.Address(address);
+  // return bchAddress.toString(bch.Address.CashAddrFormat);
+  return address;
 };
 
 exports.bchAddressToInternal = address => {
