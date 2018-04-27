@@ -89,7 +89,7 @@ Define the environment variables:
 
 ```bash
 export TELEGRAM_BOT_TOKEN=yourbottoken:yoursecret
-export BITCOIND_URL=http://rpcuser:rpcpassword@localhost:8333
+export BITCOIND_URL=http://rpcuser:rpcpassword@localhost:8332
 export STAFF_USER_ID=403107081
 export TELEGRAM_BOT_USERNAME=YourBotUserName
 export DEFAULT_STICKER_SET=pepe
