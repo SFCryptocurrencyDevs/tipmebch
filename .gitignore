@@ -124,6 +124,5 @@ env.sh
 .DS_Store
 
 # Rust
-/native/target
+/meetup_bot/target
 **/*.rs.bk
-/native/index.node
