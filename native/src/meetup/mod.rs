@@ -71,24 +71,36 @@ fn respond(
     // The nicest code here (WOW RUST IS AWESOME AM I RITE?)
     // For new contributers, this is where you add new commands.
     let response = match command {
-        "/help" => format!("Welcome to the Stellar Meetup Bot!\n\n
+        "/help" => format!(
+            "Welcome to the Stellar Meetup Bot!\n\n
                             Commands:\n
                             /help: how I do dis?\n
                             /about: who, what, when, where of this bot\n
-                            /price: get the current XLM price\n"),
-        "/about" => format!("Welcome to the Stellar Meetup Bot!\n\n
+                            /price: get the current XLM price\n"
+        ),
+        "/about" => format!(
+            "Welcome to the Stellar Meetup Bot!\n\n
                             Created by Rob Durst @ 2018 for SF Cryptocurrency Devs\n
                             Send XLM from one to another seemlessly via Meetup\n
-                            Why... why not?\n"),
-        "/price" => format!(
-            "The current price of XLM is ${:?}",
-            stellar::cryptocompare::get_xlm_price().unwrap()
+                            Why... why not?\n"
         ),
+        "/price" => {
+            if split_word.len() > 1 {
+                let data = stellar::cryptocompare::get_xlm_price(split_word[1])
+                    .expect("No error from cryptocompare");
+                match data {
+                    Some(price) => format!("The current price is ${:?}", price),
+                    _ => format!("Curency not found!"),
+                }
+            } else {
+                format!("Currency not specified.")
+            }
+        }
         _ => format!("err"),
     };
 
     if response != "err" {
-        // Create ahashmap to store the data we want to
+        // Create a hashmap to store the data we want to
         // send in the http request.
         let event_id = env::var("MEETUP_EVENT_ID").unwrap();
         let id_here = id.as_i64().unwrap().to_string();
