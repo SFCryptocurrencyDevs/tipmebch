@@ -11,7 +11,7 @@ use neon::js::JsString;
 pub mod meetup;
 
 fn stream(call: Call) -> JsResult<(JsString)> {
-    meetup::stream::connect_to_stream();
+    meetup::connect_to_stream();
     let scope = call.scope;
     Ok(JsString::new(scope, "hello").unwrap())
 }
