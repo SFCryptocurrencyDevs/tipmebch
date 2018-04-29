@@ -1,4 +1,4 @@
-mod stellar;
+pub mod stellar;
 
 use std::env;
 use std;
