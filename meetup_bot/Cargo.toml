@@ -1,0 +1,13 @@
+[package]
+name = "tipme"
+version = "0.1.0"
+authors = ["robertdurst <rsdurst@colby.edu>"]
+license = "MIT"
+
+[lib]
+name = "tipme"
+
+[dependencies]
+reqwest = "0.8.5"
+ws = "*"
+serde_json = "1.0"
