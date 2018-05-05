@@ -2,13 +2,12 @@
   "name": "sfcd",
   "version": "1.0.0",
   "description": "A bot for automatically paying out merged commits to a Github Repo.",
-  "author": "robertDurst",
+  "author": "",
   "main": "github.js",
   "scripts": {
     "start": "node server.js",
     "sync": "node sync.js"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",

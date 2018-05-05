@@ -1,5 +1,6 @@
 use stellar_client::sync::{Client};
 use stellar_client::endpoint::{account, Limit, Order, Direction, Cursor};
+use stellar_client::resources::operation::OperationKind;
 use std::time::Duration;
 use futures::prelude::*;
 use futures_timer::Interval;
@@ -33,11 +34,14 @@ impl Poll {
 
         let payments = client.request(endpoint).unwrap();
         
-        println!("{:?}", payments.records());
-
+        // If there are new records, update last cursor and parse for new deposits
         if payments.records().len() > 0 {
+
+            // Update last cursor
             let last_cursor = payments.records()[0].paging_token();
             self.cursor = FromStr::from_str(last_cursor).unwrap();
+
+            println!("{:?}", payments);
         }
     }
 }
