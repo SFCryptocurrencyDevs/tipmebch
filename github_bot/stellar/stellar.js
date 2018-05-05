@@ -1,8 +1,7 @@
-// TODO: allow for this to be run on the main network
 const axios = require('axios');
 var StellarSdk = require('stellar-sdk');
-StellarSdk.Network.useTestNetwork();
-var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+StellarSdk.Network.usePublicNetwork();
+var server = new StellarSdk.Server(process.env.STELLAR_BASE_URL);
 
 var keypair = StellarSdk.Keypair
   .fromSecret(process.env.STELLAR_SECRET_KEY);
@@ -23,8 +22,6 @@ const sendXLM = async accountId => {
     try {
         const account = await server.loadAccount(keypair.publicKey())
         let transaction = new StellarSdk.TransactionBuilder(account)
-        // The `changeTrust` operation creates (or alters) a trustline
-        // The `limit` parameter below is optional
         .addOperation(StellarSdk.Operation.payment({
             destination: accountId,
             asset: StellarSdk.Asset.native(),

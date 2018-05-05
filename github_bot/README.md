@@ -15,6 +15,7 @@ AWARD_AMOUNT => however many XLM you want to award per merged pull request
 WRITE_AUTH_TOKEN_GITHUB => your github personal access toekn
 BOT_INTERACTION_ISSUE_NUMBER => the issue number of the BOT INTERACTION CHANNEL where users will talk to the bot
 POSTGRES_URI => postgres"//USERNAME:PASSWORD@localhost:PORT/DATABASE_NAME
+GITHUB_REPO => "github_organization/repo_name"
 ```
 
 Fund your bot Stellar account... if this bot has 0 XLM, you won't be able to reward anyone.

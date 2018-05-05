@@ -92,9 +92,6 @@ source $HOME/.cargo/env
 ```bash
 brew install nodejs
 npm install
-cd github_bot
-npm install
-cd ..
 ```
 
 ## Configuration

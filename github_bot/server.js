@@ -1,8 +1,3 @@
-/**
- * Simple express server that receives events from
- * Asana and Github, acting as a webhook and an
- * intermediary to keep the two in sync.
- */
 const bodyParser = require('body-parser');
 const express = require('express');
 
