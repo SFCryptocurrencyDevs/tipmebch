@@ -91,7 +91,7 @@ const updateStellarAddress = async (githubId, stellarAddress) => {
         let checkExists = await getUser(githubId);
         if (!checkExists) {
             await addUser(githubId);
-        } else 
+        }
         await User.update({ stellarAddress }, { where: { githubId } });
         return true;
     } catch (err) {

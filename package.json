@@ -3,9 +3,10 @@
   "version": "1.0.10",
   "description": "Tipping for Telegram with BCH",
   "scripts": {
+    "bounty": "node ./github_bot/server.js",
     "watch": "nodemon -x 'DEBUG=* npm start'",
     "start": "node -r panik index.js",
-    "install": "neon build"
+    "sync": "node ./github_bot/sync.js"
   },
   "keywords": [
     "bitcoin",
@@ -29,7 +30,12 @@
     "shortid": "2.2.8",
     "superagent": "3.8.2",
     "telegraf": "3.18.0",
-    "neon-cli": "^0.1.22"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "octonode": "^0.9.2",
+    "pg": "^7.4.2",
+    "sequelize": "^4.37.6",
+    "stellar-sdk": "^0.8.0"
   },
   "main": "index.js",
   "devDependencies": {

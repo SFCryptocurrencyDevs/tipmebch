@@ -107,10 +107,19 @@ export DEFAULT_STICKER_SET=pepe
 export REDIS_URL=redis://localhost
 ```
 
-## Running
+## Setup the Github Bounty Bot
+ git@github.com:SFCryptocurrencyDevs/tipmebch.git
+Check out the readme [here](https://github.com/SFCryptocurrencyDevs/tipmebch/github_bot/README.md)
 
+## Running
+Start the tipbot
 ```bash
 npm start
+```
+
+Start the github bounty bot
+```bash
+npm run bounty
 ```
 
 ## Stickers sets
