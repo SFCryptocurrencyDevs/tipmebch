@@ -56,8 +56,8 @@ const botHasMoney = async () => {
     try {
         const url = `${process.env.STELLAR_BASE_URL}/accounts/${keypair.publicKey()}`
         let resp = await axios.get(url);
-        const balance = balances.map(x => x.asset_type == 'native');
-        return balance >= Number(process.env.AWARD_AMOUNT);
+        const balance = resp.data.balances.filter(x => x.asset_type == 'native')[0];
+        return Number(balance.balance) >= Number(process.env.AWARD_AMOUNT);
    } catch (err) {
        return false;
    }
@@ -67,4 +67,5 @@ module.exports = {
     accountExists,
     sendXLM,
     createAccount,
+    botHasMoney,
 }
