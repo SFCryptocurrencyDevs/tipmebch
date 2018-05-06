@@ -32,6 +32,8 @@ npm run sync
 npm start
 ```
 
+*Note:* will start on port 3003.
+
 ## Commands
 
 **/claim**: claim your reward by withdrawing the XLM to the Stellar address you registered
