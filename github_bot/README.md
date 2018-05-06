@@ -7,14 +7,20 @@ Hello and welcome to the Github Bounty Bot. This is a very simple bounty bot tha
 ## Setup
 First, you will need to setup a postgres database. You can call this database whatever you want -- just make sure to specify the db name in the uri.
 
+If you are running Ubuntu, [here is a great place to get started](https://gist.github.com/j1n3l0/c69280f039884e41e6cd3cb80163be07) with postgres.
+
+[Here is also the command to get started setting](https://stackoverflow.com/questions/11919391/postgresql-error-fatal-role-username-does-not-exist) up your db (it helped me, maybe it will help you).
+
+You will also need node.js. [Here is how to get node](https://askubuntu.com/questions/993975/how-can-i-install-npm-on-17-10) on Ubuntu.
+
 Setup your environment variables:
 ```
 STELLAR_SECRET_KEY => stellar secret key for the bot account
 STELLAR_BASE_URL => the url of the horizon instance you wish to communicate with (horizon.stellar.org is the SDF public network url)
 AWARD_AMOUNT => however many XLM you want to award per merged pull request
-WRITE_AUTH_TOKEN_GITHUB => your github personal access toekn
+WRITE_AUTH_TOKEN_GITHUB => your github personal access token
 BOT_INTERACTION_ISSUE_NUMBER => the issue number of the BOT INTERACTION CHANNEL where users will talk to the bot
-POSTGRES_URI => postgres"//USERNAME:PASSWORD@localhost:PORT/DATABASE_NAME
+POSTGRES_URI => "postgres://USERNAME:PASSWORD@localhost:PORT/DATABASE_NAME"
 GITHUB_REPO => "github_organization/repo_name"
 ```
 

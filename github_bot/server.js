@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
 });
 
 app.post('/github', (req, res) => {
-  test.githubToAsana(req.body);
+  test.handleGithubWebhook(req.body);
   res.sendStatus(200);
 });
 
