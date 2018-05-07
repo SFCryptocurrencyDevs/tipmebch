@@ -11,8 +11,7 @@ name = "tipme"
 reqwest = "0.8.5"
 ws = "*"
 serde_json = "1.0"
-stellar-client = "0.1.1"
-futures-timer = "0.1"
-futures = "*"
+stellar-client = { git = "https://github.com/robertDurst/stellar-sdk.git", branch = "memo" }
 postgres = "0.15"
+schedule_recv = "0.1.0"
 
