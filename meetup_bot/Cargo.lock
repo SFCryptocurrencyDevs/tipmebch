@@ -863,7 +863,7 @@ dependencies = [
 [[package]]
 name = "stellar-client"
 version = "0.1.1"
-source = "git+https://github.com/robertDurst/stellar-sdk.git?branch=memo#43fea3783900295ca863555aee4f38ca4e81582b"
+source = "git+https://github.com/kbacha/stellar-sdk.git#77f1d27ea6f26fb633fcb4731c56ad4fd1fd9875"
 dependencies = [
  "base64 0.9.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "chrono 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -929,7 +929,7 @@ dependencies = [
  "reqwest 0.8.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "schedule_recv 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_json 1.0.17 (registry+https://github.com/rust-lang/crates.io-index)",
- "stellar-client 0.1.1 (git+https://github.com/robertDurst/stellar-sdk.git?branch=memo)",
+ "stellar-client 0.1.1 (git+https://github.com/kbacha/stellar-sdk.git)",
  "ws 0.7.6 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -1322,7 +1322,7 @@ dependencies = [
 "checksum slab 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "fdeff4cd9ecff59ec7e3744cbca73dfe5ac35c2aedb2cfba8a1c715a18912e9d"
 "checksum smallvec 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)" = "4c8cbcd6df1e117c2210e13ab5109635ad68a929fcbb8964dc965b76cb5ee013"
 "checksum socket2 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)" = "ff606e0486e88f5fc6cfeb3966e434fb409abbc7a3ab495238f70a1ca97f789d"
-"checksum stellar-client 0.1.1 (git+https://github.com/robertDurst/stellar-sdk.git?branch=memo)" = "<none>"
+"checksum stellar-client 0.1.1 (git+https://github.com/kbacha/stellar-sdk.git)" = "<none>"
 "checksum stringprep 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)" = "8ee348cb74b87454fff4b551cbf727025810a004f88aeacae7f85b87f4e9a1c1"
 "checksum syn 0.13.7 (registry+https://github.com/rust-lang/crates.io-index)" = "61b8f1b737f929c6516ba46a3133fd6d5215ad8a62f66760f851f7048aebedfb"
 "checksum take 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "b157868d8ac1f56b64604539990685fa7611d8fa9e5476cf0c02cf34d32917c5"
