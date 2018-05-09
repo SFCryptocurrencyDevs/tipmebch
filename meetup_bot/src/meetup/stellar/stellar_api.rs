@@ -3,30 +3,44 @@ use stellar_client::endpoint::{account, Limit, Order, Direction, Cursor};
 use stellar_client::resources::Memo;
 use std::str::FromStr;
 use std::{thread, time};
-use std::collections::HashMap;
 
 #[derive(Debug)]
 pub struct Poll {
     cursor: i64,
-    filter: Filter,
+    memo: String,
 }
 
 impl Poll {
-    pub fn new() -> Poll {
+    pub fn new(memo: String) -> Poll {
         Poll {
             cursor: 0,
-            filter: Filter::new(),
+            memo,
         }
     }
 
-    pub fn init(&mut self) {
-        loop {
-            thread::sleep(time::Duration::from_millis(1000));
-            self.get_payments();
-        }
+    // Initalize a new Poll and a new listening thread
+    pub fn init(memo: String) {
+        // TODO: close/destroy thread?
+        // TODO: is this dropping correct?
+        // TODO: end the thread in case the deposit "times out"
+         thread::spawn(move|| {
+             let mut poll = Poll::new(memo.to_owned());
+            loop {
+                thread::sleep(time::Duration::from_millis(1000));
+                // Once the memo has been received, it will break
+                // out of the loop.
+                let is_done = poll.get_payments();
+                if is_done {
+                    break;
+                }
+            }
+            println!("Exiting thread");
+            drop(memo);
+            drop(poll);
+        });
     }
 
-    fn get_payments(&mut self) {
+    fn get_payments(&mut self) -> bool {
         
     // Establish whether connecting to testnet or mainnet
     let client = Client::horizon_test().unwrap();
@@ -50,43 +64,16 @@ impl Poll {
             
             for node in transactions.records().iter() {
                 if let &Memo::Text(ref value) = node.memo() {
-                    if self.filter.memo_exists(value) {
-                        self.filter.remove_memo(value);
+                    if &self.memo == value {
                         println!("🔥 Received transaction with memo: {} 🔥", value);
-                    } else {
-                        println!("Received extraneous transaction with memo: {}", value);
+                        // Update the balance of this person's account in postgres
+                        return true
                     }
-                    
                 }           
             }
         }
-    }
 
-    pub fn add_memo(&mut self, memo: &str) {
-        self.filter.add_memo(memo);
-    }
-}
-
-#[derive(Debug)]
-struct Filter {
-    memo_map: HashMap<String, bool>,
-}
-
-impl Filter {
-    fn new() -> Filter {
-        Filter {memo_map: HashMap::new()}
-    }
-    
-    fn add_memo(&mut self, memo: &str) {
-        &self.memo_map.insert(memo.to_string(), true);
-    }
-
-    fn remove_memo(&mut self, memo: &str) {
-        &self.memo_map.remove(memo);
-    }
-    
-    fn memo_exists(&self, memo: &str) -> bool {
-        self.memo_map.contains_key(memo)
+        false
     }
 }
 
