@@ -6,6 +6,9 @@ use serde_json;
 use ws::{connect, Handler, Handshake, Message, Result, Sender};
 use reqwest;
 use std::collections::HashMap;
+use rocket;
+use rand::Rng;
+use rand;
 
 struct Client {
     out: Sender,
@@ -118,4 +121,26 @@ fn respond(
     }
 
     Ok(())
+}
+
+// This endpoint is called by the meetup bot to
+// get and display a memo to be used by the user
+// to deposit funds into their "tipbot account"
+#[get("/gen_memo")]
+fn gen_memo()-> String {
+    let memo: String = rand::thread_rng()
+        .gen_ascii_chars()
+        .take(15)
+        .collect();
+    
+    // Initalize a new poll listener
+    stellar::stellar_api::Poll::init(memo.to_owned());
+    
+    format!("{}", memo)
+}
+
+pub fn init() {
+    // Startup the rocket server
+    rocket::ignite()
+        .mount("/", routes![gen_memo]).launch();
 }
