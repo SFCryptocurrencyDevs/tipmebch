@@ -5,26 +5,24 @@ use std::str::FromStr;
 use std::{thread, time};
 use std::collections::HashMap;
 
-pub fn init_poll() {
-    let mut poll = Poll::new();
-    poll.add_memo("hello", 10);
-    
-    loop {
-        thread::sleep(time::Duration::from_millis(1000));
-        poll.get_payments();
-    }
-}
-
-struct Poll {
+#[derive(Debug)]
+pub struct Poll {
     cursor: i64,
     filter: Filter,
 }
 
 impl Poll {
-    fn new() -> Poll {
+    pub fn new() -> Poll {
         Poll {
             cursor: 0,
             filter: Filter::new(),
+        }
+    }
+
+    pub fn init(&mut self) {
+        loop {
+            thread::sleep(time::Duration::from_millis(1000));
+            self.get_payments();
         }
     }
 
@@ -64,13 +62,14 @@ impl Poll {
         }
     }
 
-    fn add_memo(&mut self, memo: &str, amount: i64) {
-        self.filter.add_memo(memo, amount);
+    pub fn add_memo(&mut self, memo: &str) {
+        self.filter.add_memo(memo);
     }
 }
 
+#[derive(Debug)]
 struct Filter {
-    memo_map: HashMap<String, i64>,
+    memo_map: HashMap<String, bool>,
 }
 
 impl Filter {
@@ -78,8 +77,8 @@ impl Filter {
         Filter {memo_map: HashMap::new()}
     }
     
-    fn add_memo(&mut self, memo: &str, amount: i64) {
-        &self.memo_map.insert(memo.to_string(), amount);
+    fn add_memo(&mut self, memo: &str) {
+        &self.memo_map.insert(memo.to_string(), true);
     }
 
     fn remove_memo(&mut self, memo: &str) {

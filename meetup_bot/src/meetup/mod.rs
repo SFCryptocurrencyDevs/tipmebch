@@ -6,6 +6,9 @@ use serde_json;
 use ws::{connect, Handler, Handshake, Message, Result, Sender};
 use reqwest;
 use std::collections::HashMap;
+use rocket;
+use rand::Rng;
+use rand;
 
 struct Client {
     out: Sender,
@@ -118,4 +121,25 @@ fn respond(
     }
 
     Ok(())
+}
+
+
+#[get("/gen_memo")]
+fn hello(poll: rocket::State<stellar::stellar_api::Poll>)-> String {
+    let memo: String = rand::thread_rng()
+        .gen_ascii_chars()
+        .take(15)
+        .collect();
+    
+    poll.add_memo(&memo);
+    println!("{:?}", poll);
+    
+    format!("{}", memo)
+}
+
+pub fn init() {
+    let poll = stellar::stellar_api::Poll::new();
+    rocket::ignite()
+        .manage(poll)
+        .mount("/", routes![hello]).launch();
 }
