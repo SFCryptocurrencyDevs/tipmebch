@@ -43,6 +43,7 @@ impl Poll {
 
         let endpoint;
         // If this is the first time, get latest cursor (ie order=desc and latest is top)
+        // TODO: should not hard code public keys
         if self.cursor == 0 {
             endpoint = account::Transactions::new(
                 "GCJY6RHN3SOUKBZXTDNWEJUSOH5PY7GV5Q44OK4BGKYHRM7EE5FXVHW7",
