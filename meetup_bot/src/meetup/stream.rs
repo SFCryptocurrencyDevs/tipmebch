@@ -10,6 +10,8 @@ struct Client {
 }
 
 impl Handler for Client {
+    // TODO: delete this
+    // I never use this code, but if I remove it, I receive errors.
     fn on_open(&mut self, _: Handshake) -> Result<()> {
         self.out.send("Hello WebSocket")
     }
@@ -54,6 +56,7 @@ fn deserialize_string(msg: &Message) -> std::result::Result<(), serde_json::Erro
         respond(&v["id"], &v["comment"]).expect("");
     }
 
+    // TODO: this does not need to return anything
     Ok(())
 }
 
@@ -82,6 +85,12 @@ fn respond(
                             Send XLM from one to another seemlessly via Meetup\n
                             Why... why not?\n"
         ),
+        "/deposit" => {
+            // TODO: deal with errors
+            // TODO: should not hard code public address
+            let data = get_new_memo().unwrap();
+                format!("Send a transaction to GCJY6RHN3SOUKBZXTDNWEJUSOH5PY7GV5Q44OK4BGKYHRM7EE5FXVHW7 with memo: {}", data)
+        }
         "/price" => {
             if split_word.len() > 1 {
                 let data = get_crypto_price(split_word[1]).expect("No error from cryptocompare");
@@ -114,8 +123,18 @@ fn respond(
         client.post(url).form(&map).send()?;
     }
 
+    // TODO: this does not need to return anything
     Ok(())
 }
+
+
+pub fn get_new_memo() -> std::result::Result<(String), reqwest::Error> {
+    let client = reqwest::Client::new();
+    let resp = client.get("http://localhost:8000/gen_memo").send()?.text()?;
+
+    Ok(resp)
+}
+
 
 // TODO: figure out how to deal with errors correctly
 // TODO: is f64 the correct return val?
