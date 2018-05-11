@@ -1,3 +1,4 @@
+use std::env;
 use std::str::FromStr;
 use std::{thread, time};
 use stellar_client::endpoint::{account, Cursor, Direction, Limit, Order};
@@ -19,17 +20,20 @@ impl Poll {
     pub fn init(memo: String) {
         // TODO: close/destroy thread?
         // TODO: is this dropping correct?
-        // TODO: end the thread in case the deposit "times out"
         thread::spawn(move || {
             let mut poll = Poll::new(memo.to_owned());
+            let mut count = 0;
             loop {
                 thread::sleep(time::Duration::from_millis(1000));
                 // Once the memo has been received, it will break
                 // out of the loop.
                 let is_done = poll.get_transactions();
-                if is_done {
+                // Exit loop (and end thread??) if the payment has been
+                // received or it has been 20 minutes
+                if is_done || count == 1200 {
                     break;
                 }
+                count += 1;
             }
             println!("Exiting thread");
             drop(memo);
@@ -43,17 +47,14 @@ impl Poll {
 
         let endpoint;
         // If this is the first time, get latest cursor (ie order=desc and latest is top)
-        // TODO: should not hard code public keys
         if self.cursor == 0 {
-            endpoint = account::Transactions::new(
-                "GCJY6RHN3SOUKBZXTDNWEJUSOH5PY7GV5Q44OK4BGKYHRM7EE5FXVHW7",
-            ).with_limit(200)
+            endpoint = account::Transactions::new(&env::var("BOT_STELLAR_ADDRESS").unwrap())
+                .with_limit(200)
                 .with_order(Direction::Desc)
                 .with_cursor("now");
         } else {
-            endpoint = account::Transactions::new(
-                "GCJY6RHN3SOUKBZXTDNWEJUSOH5PY7GV5Q44OK4BGKYHRM7EE5FXVHW7",
-            ).with_limit(200)
+            endpoint = account::Transactions::new(&env::var("BOT_STELLAR_ADDRESS").unwrap())
+                .with_limit(200)
                 .with_order(Direction::Asc)
                 .with_cursor(&self.cursor.to_string());
         }

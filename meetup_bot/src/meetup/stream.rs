@@ -3,26 +3,17 @@ use serde_json;
 use std;
 use std::collections::HashMap;
 use std::env;
-use ws::{connect, Handler, Handshake, Message, Result, Sender};
+use ws::{connect, Handler, Message, Result};
 
-struct Client {
-    out: Sender,
-}
+struct Client;
 
 impl Handler for Client {
-    // TODO: delete this
-    // I never use this code, but if I remove it, I receive errors.
-    fn on_open(&mut self, _: Handshake) -> Result<()> {
-        self.out.send("Hello WebSocket")
-    }
-
     fn on_message(&mut self, msg: Message) -> Result<()> {
         deserialize_string(&msg).expect("");
         Ok(())
     }
 }
 
-// TODO: close stream at some point
 // Connect to the Meetup API ws
 pub fn connect_to_stream() {
     let base = "ws://stream.meetup.com/2/event_comments";
@@ -32,7 +23,7 @@ pub fn connect_to_stream() {
         &env::var("MEETUP_EVENT_ID").unwrap()
     );
 
-    connect(url, |out| Client { out: out }).unwrap()
+    connect(url, |_out| Client {}).unwrap()
 }
 
 // Deserialize the received data
@@ -87,9 +78,12 @@ fn respond(
         ),
         "/deposit" => {
             // TODO: deal with errors
-            // TODO: should not hard code public address
             let data = get_new_memo().unwrap();
-                format!("Send a transaction to GCJY6RHN3SOUKBZXTDNWEJUSOH5PY7GV5Q44OK4BGKYHRM7EE5FXVHW7 with memo: {}", data)
+            format!(
+                "Send a transaction to {} with memo: {}",
+                &env::var("BOT_STELLAR_ADDRESS").unwrap(),
+                data
+            )
         }
         "/price" => {
             if split_word.len() > 1 {
@@ -127,14 +121,12 @@ fn respond(
     Ok(())
 }
 
-
 pub fn get_new_memo() -> std::result::Result<(String), reqwest::Error> {
     let client = reqwest::Client::new();
     let resp = client.get("http://localhost:8000/gen_memo").send()?.text()?;
 
     Ok(resp)
 }
-
 
 // TODO: figure out how to deal with errors correctly
 // TODO: is f64 the correct return val?

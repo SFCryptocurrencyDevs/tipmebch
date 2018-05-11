@@ -23,9 +23,9 @@ fn gen_memo() -> String {
 
 pub fn init() {
     // Start the meetup bot stream
-     thread::spawn(|| {
-         stream::connect_to_stream();
-     });
+    thread::spawn(|| {
+        stream::connect_to_stream();
+    });
     // Startup the rocket server
     rocket::ignite().mount("/", routes![gen_memo]).launch();
 }
